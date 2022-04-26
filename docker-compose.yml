@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  app:
+    working_dir: /var/app/
+    container_name: app
+    build: .
+    volumes:
+      - .:/var/app/
+    ports:
+      - "8000:80"
+    command: bash -c "php -S app:80 -t public"

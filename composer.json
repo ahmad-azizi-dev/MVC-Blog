@@ -1,0 +1,20 @@
+{
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "ahmad",
+      "email": "ahmad.azizi.dev@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "App\\Core\\": "core/",
+      "Config\\": "config/"
+    }
+  }
+}
