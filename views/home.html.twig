@@ -1,0 +1,31 @@
+{% extends "layout/base.html.twig" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+    <div class="card mt-0 mb-5">
+        <h6 class="card-body text-center m-0">Welcome to Home Page &#128512;</h6>
+    </div>
+    {% for post in posts %}
+        <h2 class="mt-4">{{ post['title'] }}</h2>
+        <p class="m-2">created by: <b class="text-dark"> {{ post['creator_name'] }}</b>
+        <hr>
+        <p>Created at: <b>{{ post['created_at'] }}</b></p>
+
+        <div class="text-justify overflow-hidden"><p>{{ post['description'] }}</p></div>
+        <hr>
+        <div class="col-md-10 text-right">
+            <form action="#" method="post">
+                <input name="id" type="hidden" value="{{ post['id'] }}">
+                <a class="btn btn-sm btn-warning  m-2" href="#">Edit</a>
+                <a class="btn btn-sm btn-primary m-2" href="#">Read more...</a>
+                <button type="submit" class="btn btn-sm btn-danger m-2">Delete</button>
+            </form>
+        </div>
+        <hr>
+        <hr>
+    {% endfor %}
+    <div class="col-md-12 text-center">MVC Blog Created By Ahmad Azizi</div>
+
+{% endblock %}

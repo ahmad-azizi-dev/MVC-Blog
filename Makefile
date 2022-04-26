@@ -5,6 +5,9 @@ run:
 migrate_up:
 	docker exec app php bin/console.php migrate:up
 
+database_seed:
+	docker exec app php bin/console.php db:seed
+
 migrate_down:
 	docker exec app php bin/console.php migrate:down
 

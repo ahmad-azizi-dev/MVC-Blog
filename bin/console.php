@@ -13,10 +13,16 @@ require_once __ROOT__ . '/vendor/autoload.php';
 $pdoConn = AppContainer::make(DbConnection::Class)->getConnection();
 
 
-if ($argv[1] == 'migrate:up') {
-    QueryHandler::run($pdoConn, AppConfig::MIGRATIONS_DIRECTORY);
+switch ($argv[1]) {
+    case 'migrate:up':
+        QueryHandler::run($pdoConn, AppConfig::MIGRATIONS_DIRECTORY);
+        break;
 
-} elseif ($argv[1] == 'migrate:down') {
-    $pdoConn->query("drop database if exists " . DatabaseConfig::DB_NAME
-        . "; create database " . DatabaseConfig::DB_NAME);
+    case 'db:seed':
+        QueryHandler::run($pdoConn, AppConfig::SEEDS_DIRECTORY);
+        break;
+
+    case 'migrate:down':
+        $pdoConn->query("drop database if exists " . DatabaseConfig::DB_NAME
+            . "; create database " . DatabaseConfig::DB_NAME);
 }

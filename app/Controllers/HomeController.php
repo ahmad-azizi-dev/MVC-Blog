@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Core\BaseController;
-
+use App\Core\Response;
+use App\Models\Post;
 
 
 class HomeController extends BaseController
@@ -11,7 +12,10 @@ class HomeController extends BaseController
 
     public function index()
     {
-        echo 'This is home page.';
+        $posts = new Post();
+        Response::render('home.html.twig', [
+            'posts' => $posts->getAllWithCreatorUserName()
+        ]);
     }
 
 }

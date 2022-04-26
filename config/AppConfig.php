@@ -10,4 +10,8 @@ class AppConfig
 
     const MIGRATIONS_DIRECTORY = '/database/Migrations/';
 
+    const SEEDS_DIRECTORY = '/database/Seeds/';
+
+    const VIEWS_DIRECTORY = __ROOT__ . '/views/';
+
 }
