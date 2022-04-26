@@ -3,7 +3,6 @@
 namespace App\Core;
 
 
-use Config\AppConfig;
 
 /**
  *  Strategy Pattern.
@@ -13,11 +12,11 @@ class Router
     private array $routes = [];   // example  "GET"=> [ "posts"=> ["App\Controllers\PostController" , "show"} ],
 
 
-    public static function Load(): void
+    public static function Load(string $routesDirectory)
     {
         $router = new static();
-        require AppConfig::ROUTES_DIRECTORY;
-        $router->direct(Request::uri(), Request::method());
+        require $routesDirectory;
+        return $router;
     }
 
 
@@ -36,7 +35,7 @@ class Router
 
     private function callMethod(string $controller, string $method): void
     {
-        call_user_func([new $controller(), $method]);    // echo response
+        call_user_func([new $controller(), 'action'], $method,);    // echo response
     }
 
 }

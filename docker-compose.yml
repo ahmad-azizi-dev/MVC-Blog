@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: database_name
+      MYSQL_USER: user_name
+      MYSQL_PASSWORD: 123
+    ports:
+      - "9906:3306"
   app:
     working_dir: /var/app/
     container_name: app
@@ -10,3 +21,5 @@ services:
     ports:
       - "8000:80"
     command: bash -c "php -S app:80 -t public"
+    depends_on:
+      - mysql
