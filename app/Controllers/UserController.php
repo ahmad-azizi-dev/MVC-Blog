@@ -7,6 +7,7 @@ use App\Core\BaseController;
 use App\Core\Request;
 use App\Core\Response;
 use App\Models\User;
+use App\Validations\UserValidation;
 
 
 class UserController extends BaseController
@@ -26,6 +27,10 @@ class UserController extends BaseController
 
     public function login(): void
     {
+        Request::Validate([
+            'email' => 'required|string|minLength:4|email',
+            'password' => 'required|string|minLength:6',
+        ]);
 
         $user = new User();
         $inputUser = $user->getByEmail(Request::param('email'));
@@ -37,11 +42,17 @@ class UserController extends BaseController
             Response::redirect('/');
         }
         Response::redirectBack();
+
     }
 
 
     public function register(): void
     {
+        Request::Validate([
+            'name' => 'required|string|minLength:4',
+            'email' => 'required|string|minLength:5|email|uniqueEmail',
+            'password' => 'required|string|minLength:6',
+        ], UserValidation::class);
 
         $user = new User();
         $user->create(Request::params());

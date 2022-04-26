@@ -19,7 +19,7 @@
             <form action="/posts/delete" method="post">
                 <input name="id" type="hidden" value="{{ post['id'] }}">
                 <a class="btn btn-sm btn-warning  m-2" href="posts/edit?id={{ post['id'] }} ">Edit</a>
-                <a class="btn btn-sm btn-primary m-2" href="#">Read more...</a>
+                <a class="btn btn-sm btn-primary m-2" href="posts?id={{ post['id'] }} ">Read more...</a>
                 <button type="submit" class="btn btn-sm btn-danger m-2">Delete</button>
             </form>
         </div>

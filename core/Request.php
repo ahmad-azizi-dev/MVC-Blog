@@ -31,4 +31,13 @@ class Request
         return self::params()[$name] ?? null;
     }
 
+
+    public static function Validate(array $rules, string $validationClass = Validation::class)
+    {
+        $validation = new $validationClass($rules);
+        if (!$validation->isValid()) {
+            Response::redirectBack(400);
+        }
+    }
+
 }

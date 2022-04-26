@@ -2,6 +2,8 @@ run:
 	docker-compose up -d
 	docker exec app composer install
 
+refresh_db: migrate_down migrate_up database_seed
+
 migrate_up:
 	docker exec app php bin/console.php migrate:up
 
