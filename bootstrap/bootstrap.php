@@ -6,7 +6,7 @@ define("__ROOT__", dirname(__DIR__));
 
 require_once __ROOT__ . '/vendor/autoload.php';
 
-
+session_start();
 
 /**
  * Error and Exception handling

@@ -23,6 +23,32 @@ class Post extends BaseModel
     }
 
 
+    public function getById(string $id)
+    {
+        return $this->query("SELECT * FROM posts where id = :id", [':id' => $id])[0];
+    }
 
+
+    public function create(array $params): void
+    {
+        $this->query("INSERT INTO posts (user_id, title, description,created_at)
+                            VALUES (:user_id,:title,:description,NOW())"
+            , [':user_id' => $params['user_id'], ':title' => $params['title'], ':description' => $params['description']]);
+    }
+
+
+    public function update(array $params): void
+    {
+        $this->query("UPDATE posts SET title= :title
+                            , description = :description , created_at = now() WHERE id = :id"
+            , [':title' => $params['title'], ':description' => $params['description'], ':id' => $params['id']]);
+    }
+
+
+    public function delete(string $id): void
+    {
+        $this->query("DELETE FROM posts WHERE id = :id"
+            , [':id' => $id]);
+    }
 
 }

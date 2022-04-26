@@ -5,6 +5,7 @@ namespace App\Core;
 class Request
 {
     const GET = 'GET';
+    const POST = 'POST';
 
 
     public static function uri(): string
@@ -18,5 +19,16 @@ class Request
         return $_SERVER['REQUEST_METHOD'];
     }
 
+
+    public static function params(): array
+    {
+        return self::method() == self::GET ? $_GET : $_POST;
+    }
+
+
+    public static function param($name): ?string
+    {
+        return self::params()[$name] ?? null;
+    }
 
 }

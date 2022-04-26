@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Auth;
 use Config\AppConfig;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -16,7 +17,26 @@ class Response
     {
         $twig = new Environment(new FilesystemLoader(AppConfig::VIEWS_DIRECTORY));
 
-        echo $twig->render($template, $args);
+        echo $twig->render($template, array_merge($args, [
+            'authCheck' => Auth::check(),
+            'authUserName' => Auth::check() ? Auth::user()['name'] : ''
+        ]));
+    }
+
+
+    public static function redirect(string $path = '/'): void
+    {
+        http_response_code(303);
+        header("Location: $path");
+        die();
+    }
+
+
+    public static function redirectBack($responseCode = 303): void
+    {
+        http_response_code($responseCode);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die();
     }
 
 

@@ -16,9 +16,9 @@
         <div class="text-justify overflow-hidden"><p>{{ post['description'] }}</p></div>
         <hr>
         <div class="col-md-10 text-right">
-            <form action="#" method="post">
+            <form action="/posts/delete" method="post">
                 <input name="id" type="hidden" value="{{ post['id'] }}">
-                <a class="btn btn-sm btn-warning  m-2" href="#">Edit</a>
+                <a class="btn btn-sm btn-warning  m-2" href="posts/edit?id={{ post['id'] }} ">Edit</a>
                 <a class="btn btn-sm btn-primary m-2" href="#">Read more...</a>
                 <button type="submit" class="btn btn-sm btn-danger m-2">Delete</button>
             </form>

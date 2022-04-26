@@ -3,7 +3,6 @@
 namespace App\Core;
 
 
-
 /**
  *  Strategy Pattern.
  */
@@ -26,9 +25,18 @@ class Router
     }
 
 
+    public function post(string $uri, array $routeParam): void
+    {
+        $this->routes[Request::POST][$uri] = $routeParam;
+    }
+
+
     public function direct(string $uri, string $requestMethod): void
     {
         $routes = $this->routes[$requestMethod];
+        if (!array_key_exists($uri, $routes)) {
+            Response::notFound();
+        }
         $this->callMethod(...$routes[$uri]);
     }
 
